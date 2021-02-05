@@ -1,0 +1,13 @@
+02/04/2021: 
+	- Added the command arg '--pause-at' which gives the ability to pause at a given frame or a multiple of a frame.
+	- Printing frame number when fps is set to debug or deep-debug
+	- Updated README
+
+02/03/2021: 
+	- Updated README. Updated error checking for incorrect command arguments. Submitted assignment
+
+02/02/2021: 
+	- Started CHANGELOG. Implemented Makefile
+
+Before 02/02/2021: 
+	- Got assignment working (didn't have a changelog until 02/02, so didn't keep a log of what days I worked on this :/)

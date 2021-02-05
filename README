@@ -1,0 +1,88 @@
+Sean Griffen (griffens)
+
+This is my solution to homework 0, A Modified Abelian Sandpile. 
+It implements the base functionality with a number of additions, including printing color, changeable topple heights and topple zones, configurable plane size, step size, frames to pause at, and sink/zero display characters.
+
+To run the program, run the Makefile, and enter './sandpile.o' followed by the specified arguments in the command window
+
+The command arguments for this program are described as follows, in no particular order. 
+	It is assummed that an argument is precedded with a "--" and arguments have no such prefix. 
+	A '|' means that the arguments that are involved are never entered at the same time. Pick 1 argument to enter
+	Ignore '<>' characters when entering arguments in the command window:
+	- Frames per second:
+		- flag: fps
+		- default behavior: 5 fps
+		- arguments: 	<value> | debug | deep-debug
+		- description: Defines a fps to run the program at.
+					-	An integer fps will run the program 'like normal'. 
+					-	'debug' means the program will step when the user presses Enter on the keyboard (pressing and holding will step the program as fast as possible). This mode will also show the frame number currently being displayed
+					-	'deep-debug' will act like a 'debug' arg, but will also show individual recursion steps during toppling, rather than just showing the resulting plane after toppling has happened
+		- notes: Argument must be first when running program. If fps is less than 1, it is reset to the default
+		- example command: --fps 10
+	- Defining initial cell values:
+		- flag: 
+		- default behavior: Cell values are initialized to 0
+		- arguments: <height-coordinate> <width-coordinate> <value>
+		- decription: Define an intial value at (height, width). A value less than 0 denotes a sink at defined coordinate. This argument can be repeated an arbitrary number of times
+		- notes: Argument must be second when running program, and cells must be grouped in complete tuples
+		- example command: 1 1 2 2 2 -1 3 3 3 4 4 4 ...
+	- Printing color:
+		- flag: color
+		- default behavior: No color (prints in white)
+		- arguments: 
+		- description: Prints the cell values in color
+		- notes: Value of cell printing must be between 0 and 9, otherwise color is set to default
+		- example command: --color
+	- Change topple heights:
+		- flag: topple-height
+		- default behavior: Topple height is equal to number of cells that can be toppled to
+		- arguments: <value>
+		- description: Defines a height that when a cell value exceedes, topples said cell
+		- notes: If the topple height entered is less than 1, or less than the number of cells toppling to, this number is reset to the number of cells toppling to
+		- example command: --topple-height 8
+	- Change topple zones:
+		- flag: topple-matrix
+		- default behavior: All 8 cells around cell currently toppling to, can also be toppled to
+		- arguments: <1 | 0> <1 | 0> <1 | 0> <1 | 0> <1 | 0> <1 | 0> <1 | 0> <1 | 0>
+		- description: Defines cells (starting 1 above the cell currently toppling and continuing in a clockwise manner) that can be toppled to. 1 for true, 0 for false
+		- notes: All 8 cells must have a definition (0 or 1), otherwise program will not run correctly
+		- example command: --topple-matrix 1 0 1 0 1 0 1 0
+	- Change plane size:
+		- flag: size
+		- default behavior: height = 23, width = 23
+		- arguments: <height> <width>
+		- description: Define a size for the world plane
+		- notes: If height or width is less than 1, it is set to the default value
+		- example command: --size 10 10
+	- Change step size:
+		- flag: step-size
+		- default behavior: Add 1 grain of sand to a defined cell every program step
+		- arguments: <value>
+		- description: Defines how many grains of sand to add to a defined cell every program step
+		- notes: If value is less than 1, value is reset to the default
+		- example command: 
+	- Change cell to step at:
+		- flag: step-at
+		- default behavior: Cell in center of plane is added to every cycle
+		- arguments: <height-coordinate> <width-coordintate>
+		- description: Define a cell at (height, width) to add a grain of sand to. 
+						- Each coordinate can also be individually set to "rand" (i.e. --step-at rand rand), in which case the program will drop sand at a random (height, width) coordinate
+		- notes: If defined cell lies outside the defined plane, cell is set to the default
+		- example command: (--step-at 0 0) | (--step-at rand rand) | (--step-at 10 rand)
+	- Define sink/zero characters:
+		- flag: char
+		- default behavior: 
+		- arguments: '<sink>' '<zero>'
+		- description: Defines a char to print for sinks and a cell value of zero
+		- notes: The argument chars must have single quotes around them, other wise the program will not run correctly
+		- example command: --char 'O' '_'
+	- Pause frames
+		- flag: pause-at
+		- default: Simulation keeps running, does not pause at a frame or set of frames
+		- arguments: <value> | (multi <value>)
+		- description: Defines a single frame or multiples of a frame to pause the simulation at
+		- notes: The 'multi' argument should only be present if you want the simulation to pause at a frame that's a multiple of the value entered. Otherwise, leave out the 'multi' argument and just enter a numerical value
+		- example command: (--pause-at 400) | (--pause-at multi 53)
+		
+A command to run this application with all arguments defined may look as follows:
+	./sandpile.o [--fps (<value> | <debug> | <deep-debug>)] [<height> <width> <int>] [--color] [--topple-height <value>] [--topple-matrix <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0>] [--size <height> <width>] [--step-size <value>] [--step-at <height> <width>] [--char '<sink>' '<zero>'] [--pause-at < | multi> <value>]
