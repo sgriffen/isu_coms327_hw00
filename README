@@ -3,7 +3,7 @@ Sean Griffen (griffens)
 This is my solution to homework 0, A Modified Abelian Sandpile. 
 It implements the base functionality with a number of additions, including printing color, changeable topple heights and topple zones, configurable plane size, step size, frames to pause at, and sink/zero display characters.
 
-To run the program, run the Makefile, and enter './sandpile.o' followed by the specified arguments in the command window
+To run the program, run the Makefile, and enter './sandpile' followed by the specified arguments in the command window
 
 The command arguments for this program are described as follows, in no particular order. 
 	It is assummed that an argument is precedded with a "--" and arguments have no such prefix. 
@@ -85,4 +85,4 @@ The command arguments for this program are described as follows, in no particula
 		- example command: (--pause-at 400) | (--pause-at multi 53)
 		
 A command to run this application with all arguments defined may look as follows:
-	./sandpile.o [--fps (<value> | <debug> | <deep-debug>)] [<height> <width> <int>] [--color] [--topple-height <value>] [--topple-matrix <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0>] [--size <height> <width>] [--step-size <value>] [--step-at <height> <width>] [--char '<sink>' '<zero>'] [--pause-at < | multi> <value>]
+	./sandpile [--fps (<value> | <debug> | <deep-debug>)] [<height> <width> <int>] [--color] [--topple-height <value>] [--topple-matrix <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0> <1|0>] [--size <height> <width>] [--step-size <value>] [--step-at <height> <width>] [--char '<sink>' '<zero>'] [--pause-at < | multi> <value>]
